@@ -1,9 +1,6 @@
 package com.microservice_prj.user_service.Controller;
 
-import com.microservice_prj.user_service.Dto.userCheckPasswordRequest;
-import com.microservice_prj.user_service.Dto.userCheckPasswordResponse;
-import com.microservice_prj.user_service.Dto.userRequestCreated;
-import com.microservice_prj.user_service.Dto.userResponse;
+import com.microservice_prj.user_service.Dto.*;
 import com.microservice_prj.user_service.Model.User;
 import com.microservice_prj.user_service.Repository.userRepository;
 import com.microservice_prj.user_service.Service.userService;
@@ -38,12 +35,18 @@ public class userController {
         }
     }
     @PostMapping(path = "/check-password")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public ResponseEntity<userCheckPasswordResponse> checkPassword(@RequestBody userCheckPasswordRequest userCheckPasswordRequest){
-        if(UserService.checkPassword(userCheckPasswordRequest.userName(), userCheckPasswordRequest.password())){
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body(new userCheckPasswordResponse("True","ACCEPTED"));
-        }else{
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new userCheckPasswordResponse("False","DENIED"));
+        @ResponseStatus(HttpStatus.ACCEPTED)
+    public ResponseEntity<userCheckPasswordResponse> checkPassword(@RequestBody userCheckPasswordRequest userCheckPasswordRequest) {
+        if (UserService.checkPassword(userCheckPasswordRequest.userName(), userCheckPasswordRequest.password())) {
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(new userCheckPasswordResponse("True", "ACCEPTED"));
+        } else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new userCheckPasswordResponse("False", "DENIED"));
         }
     }
+    @PostMapping(path = "/change_password")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public ResponseEntity<String> changePassword(@RequestBody userChangePasswordRequest UserChangePasswordRequest){
+        return ResponseEntity.status(200).body("We will do it tomorrow");
+    }
 }
+
